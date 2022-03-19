@@ -1,0 +1,14 @@
+on init
+    chown root system /proc/sys/vm/dirty_background_ratio
+    chmod 0664 /proc/sys/vm/dirty_background_ratio
+    chown root system /proc/sys/vm/dirty_ratio
+    chmod 0664 /proc/sys/vm/dirty_ratio
+
+on property:sys.boot_completed=1
+    start iomanager
+
+service iomanager /vendor/bin/iomanager
+    class core
+    user root
+    group root system
+    disabled
